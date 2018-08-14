@@ -12,7 +12,7 @@ export class HomeService {
         const url = 'http://localhost:3000/data';
     
         return this.http
-            .get(url).pipe(map(r=>JSON.stringify(r)));
+            .get(url).pipe(map(r=>JSON.parse(JSON.stringify(r))));
             
     }
 }

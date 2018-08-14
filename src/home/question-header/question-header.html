@@ -1,2 +1,13 @@
 <h1>question Header</h1>
-{{data}}
+<ul>
+    <li *ngFor="let x of data">{{x.first_name |json}}
+        <ul>
+            <li *ngFor="let y of x.question">
+             {{y.category |json}}
+             <ul>
+                 <li *ngFor="let z of y.subcatogory">{{z|json}}</li>
+             </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

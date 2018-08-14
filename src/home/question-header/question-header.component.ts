@@ -8,7 +8,7 @@ import { HomeService } from '../home.service';
 })
 export class QuestionHeaderComponent
 {
-public data: any;
+public data:{};
 constructor(private homeSrv: HomeService){
    
 }
@@ -18,8 +18,7 @@ ngOnInit()
 {
     this.homeSrv.getData()
     .subscribe(r=>{
-      
-         this.data = (JSON.parse(r));
+         this.data = r;
     });
  
 
