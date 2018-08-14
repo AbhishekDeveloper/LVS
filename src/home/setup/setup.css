@@ -1,0 +1,55 @@
+legend{
+    margin-bottom: -6px;
+}
+.mTop-20{
+    margin-top: 20px;
+}
+.m-b-20{
+    margin-bottom: 20px;
+}
+.addBtn{
+    border:none;
+    background: none;
+    margin-top: 5px !important;
+}
+span.addQuestion
+{
+    background-color: #4392EF;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-right: 5px;
+    padding: 0;
+    border: 0;
+    margin-bottom: 0px;
+    color: #fff;
+    border-radius: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: initial;
+    cursor: pointer;
+}
+.buttonSection{
+    margin-top: 5%;
+    text-align: center;
+}
+.buttonSection >button{
+    width: 15%;
+    margin-left: 10px;
+}
+.savebutton > button{
+    margin-left: 86%;
+    width: 12%;
+}
+.form-group{
+    margin-bottom: 0;
+}
+.addQuestionButton >button{
+    width: 100%!important;
+}
+.row-border{
+    border: 1px solid;
+}

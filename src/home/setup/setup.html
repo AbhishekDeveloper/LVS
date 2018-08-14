@@ -1,0 +1,97 @@
+
+<div class="row row-border">
+    <div class="col-md-12 m-b-20" *ngIf="option == 'user'">
+        <ng-container *ngTemplateOutlet="userInfo"></ng-container>
+    </div>
+    <div class="col-md-12 m-b-20" *ngIf="option == 'question'">
+        <ng-container *ngTemplateOutlet="questions"></ng-container>
+    </div>
+    <div class="col-md-12 m-b-20" *ngIf="option == 'device'">
+            <ng-container *ngTemplateOutlet="device"></ng-container>
+        </div>
+</div>
+
+    <ng-template #userInfo>
+            <form [formGroup]="myForm">
+            <fieldset>
+                    <legend><span>User Info</span></legend>
+                    <small>(You will be able to choose user when making a video)</small>
+                    <div class="row mTop-20">
+                        <div class="col-lg-5">
+                        <label for="firstName">First Name</label>
+                        <input id="firstName" placeholder="First Name" name="firstName" type="text" class="form-control" required maxlength="32" />
+                        </div>
+            
+                        <div class="col-lg-5">
+                        <label for="lastName">Last Name</label>
+                        <input number id="lastName" placeholder="Last Name" name="lastName"  type="text" class="form-control" required maxlength="32" />
+                        </div>
+            
+                        <div class="col-lg-2">
+                        <label for="age">Age</label>
+                        <input id="age" type="number" placeholder="age" class="form-control"  required maxlength="32" />
+                        </div>
+                    </div>
+                    <div class="row mTop-20 savebutton">
+                            <button type="button" class="btn btn-success" (click)="user()">
+                                    NEXT
+                            </button>
+                    </div>
+                    </fieldset>
+                    </form>
+    </ng-template>
+
+    <ng-template #questions>
+            <form [formGroup]="myForm">
+                <fieldset>
+                        <legend><span>Questions</span></legend>
+                        <small>( Add QUESTION HEADERS and associated subcategory QUESTIONS)</small>
+                </fieldset>
+                    <div class="row mTop-20">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Question Header"  >
+                        </div>
+                        </div>        
+                <fieldset formArrayName="items">
+                    <div class="form-group row kitList" *ngFor="let item of myForm.get('items').controls; let i=index" [formGroup]="item">
+                        <div class="col-md-12">
+                            <div class="row mTop-20">
+                                <div class="col-md-12">
+                                <textarea  class="form-control" required placeholder="Question" formControlName="question">
+                                </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </fieldset>
+                    <div class="row mTop-20">
+                            <div class="col-md-8 addButton">
+                            <span class="addQuestion" (click)="myForm.get('items').push(buildItem('')); addQuestion()">+</span>
+                            <a (click)="myForm.get('items').push(buildItem(''))">Add Questions<small></small></a>
+                            <br>     
+                            </div>
+                    
+                            <div class="col-md-2 addQuestionButton" *ngIf="showAddQuestion">
+                                    <button type="button" (click)="saveQuestion()"  class="btn btn-success">
+                                            ADD
+                                    </button>
+                            </div>
+                            <div class="col-md-2 addQuestionButton" *ngIf="showAddQuestion">
+                                    <button type="button" (click)="done()"  class="btn btn-success">
+                                        DONE
+                                    </button>
+                            </div>
+                    </div>
+                
+            </form>
+    </ng-template>
+
+    <ng-template #device>
+            <form [formGroup]="myForm" >
+                <fieldset>
+                        <legend><span>Device Configuration</span></legend>
+                        <small>(select the appropriate video and audio input devices, and the local file location where the videos will be 
+                                stored)</small>
+                </fieldset> 
+            </form>
+    </ng-template>

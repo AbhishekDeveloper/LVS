@@ -1,0 +1,32 @@
+<div class="container">
+   <div class="row ">
+    <div class="col-md-4">
+     <div class="row row-border">
+         <div class="col-md-4">
+        <img src="../assets//images/lvs-logo.png">
+         </div>
+         <div class="col-md-8">
+             <span>Lueker video Archives</span>
+             <br>
+             <a (click)="setup()"><span class="setup">SETUP</span></a>
+         </div>
+     </div>
+     <div class="row row-border">
+         <div class="col-md-12">Select user</div>
+     </div>
+     <question-header></question-header>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row header row-border">
+            <div class="col-md-12">
+                <header>
+                <h1>{{title}}</h1>           
+                </header>
+            </div>
+        </div>
+        <lvs-setup *ngIf="option == 'setup'"></lvs-setup>
+        <lvs-recorder-section *ngIf="option == 'recording'"></lvs-recorder-section>
+    </div>
+    </div>
+</div>
