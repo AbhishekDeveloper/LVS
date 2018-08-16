@@ -12,67 +12,93 @@
 </div>
 
     <ng-template #userInfo>
-            <form [formGroup]="myForm">
+            <form #f="ngForm" (ngSubmit)="onUserSubmit(f)" (keydown.enter)="$event.preventDefault()" novalidate>
             <fieldset>
                     <legend><span>User Info</span></legend>
                     <small>(You will be able to choose user when making a video)</small>
                     <div class="row mTop-20">
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                         <label for="firstName">First Name</label>
-                        <input id="firstName" placeholder="First Name" name="firstName" type="text" class="form-control" required maxlength="32" />
+                        <input id="firstName" placeholder="First Name" [(ngModel)]="first_name" name="firstName" type="text" class="form-control" required="true" maxlength="32" />
                         </div>
             
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                         <label for="lastName">Last Name</label>
-                        <input number id="lastName" placeholder="Last Name" name="lastName"  type="text" class="form-control" required maxlength="32" />
+                        <input number id="lastName" placeholder="Last Name" [(ngModel)]="last_name" name="lastName"  type="text" class="form-control" required="true" maxlength="32" />
                         </div>
             
-                        <div class="col-lg-2">
-                        <label for="age">Age</label>
-                        <input id="age" type="number" placeholder="age" class="form-control"  required maxlength="32" />
+                        <div class="col-lg-4">
+                        <label for="userName">User Name</label>
+                        <input id="userName" type="text" placeholder="User Name" [(ngModel)]="user_name" name="userName" class="form-control"  required="true" maxlength="32" />
+                        <p *ngIf="userExist" class="error">*User already exist.</p>
                         </div>
                     </div>
+             
                     <div class="row mTop-20 savebutton">
-                            <button type="button" class="btn btn-success" (click)="user()">
-                                    NEXT
-                            </button>
+                            <div class="col-md-10">
+                           <span *ngIf="inValid" class="error">*Please fill the user info.</span>
+                            </div>
+                           <div class="col-md-2">
+                        <button type="submit" class="btn btn-success">
+                                        NEXT
+                                </button>
+                           </div>
+                        
                     </div>
                     </fieldset>
                     </form>
     </ng-template>
 
     <ng-template #questions>
-            <form [formGroup]="myForm">
+            
+            <form #f2="ngForm">
                 <fieldset>
                         <legend><span>Questions</span></legend>
                         <small>( Add QUESTION HEADERS and associated subcategory QUESTIONS)</small>
                 </fieldset>
+                <div class="row">
+                        <div class="col-md-9"></div>
+                        <div class="col-md-3">User: <b>[{{user_name}}]</b></div>
+                </div>
                     <div class="row mTop-20">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="Question Header"  >
+                                <span>Question Header</span>
+                            <input type="text" name="question_header" class="form-control" [(ngModel)]="question_header" placeholder="Question Header"  >
                         </div>
-                        </div>        
+                        </div>     
+                        </form>
+             <form [formGroup]="myForm" #f3="ngForm" (ngSubmit)="saveQestions(f3)" (keydown.enter)="$event.preventDefault()" novalidate>       
                 <fieldset formArrayName="items">
                     <div class="form-group row kitList" *ngFor="let item of myForm.get('items').controls; let i=index" [formGroup]="item">
                         <div class="col-md-12">
                             <div class="row mTop-20">
-                                <div class="col-md-12">
+                                <div class="col-md-11">
+                                        <span>Question</span>
                                 <textarea  class="form-control" required placeholder="Question" formControlName="question">
                                 </textarea>
                                 </div>
+                                <div class="col-xs-1 padding-6 ">
+                                <button type="button" class="removeBtn" (click)="myForm.get('items').removeAt(i)">
+                                        <img src="../../assets/images/Circle X.png">
+                                </button>
+                        </div>
                             </div>
                         </div>
                         </div>
                     </fieldset>
                     <div class="row mTop-20">
-                            <div class="col-md-8 addButton">
+                            <div class="col-md-6 addButton">
                             <span class="addQuestion" (click)="myForm.get('items').push(buildItem('')); addQuestion()">+</span>
                             <a (click)="myForm.get('items').push(buildItem(''))">Add Questions<small></small></a>
                             <br>     
                             </div>
-                    
                             <div class="col-md-2 addQuestionButton" *ngIf="showAddQuestion">
-                                    <button type="button" (click)="saveQuestion()"  class="btn btn-success">
+                                        <button type="button" (click)="newQuestion()"  class="btn btn-success">
+                                                NEW
+                                        </button>
+                                </div>
+                            <div class="col-md-2 addQuestionButton" *ngIf="showAddQuestion">
+                                    <button type="submit"  class="btn btn-success">
                                             ADD
                                     </button>
                             </div>
@@ -82,8 +108,13 @@
                                     </button>
                             </div>
                     </div>
+                    <div class="row mTop-20 msg">
+                            <span *ngIf="errorMsg" class="error">*{{errorMsg}}</span>
+                            <span *ngIf="sucessMsg">{{sucessMsg}}</span>
+                    </div>
                 
             </form>
+
     </ng-template>
 
     <ng-template #device>

@@ -1,1 +1,28 @@
-<h1>Recorder-content</h1>
+<div class="row header row-border">
+        <div class="col-md-12">
+            <header>
+         <span class="recordingRedIcon"></span>   
+         <span class="recordingText">
+             You are now recording:
+         </span>   
+         <br> 
+         <br>
+         <div class="profileImg">
+         <img  src="../../assets//images/profiles.png">
+         <span *ngIf="userName == '--select user--'"> User A</span>
+         <span *ngIf="userName != '--select user--'" class="bold"> [{{userName}}],</span>
+   
+         <span class="title">Title: <b>{{category |uppercase}}</b></span>
+         <br>
+         <span>
+            {{question}}
+         </span>
+
+    </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="row">
+            <video #video width="640" height="480" autoplay></video>
+    </div>

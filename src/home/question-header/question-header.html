@@ -1,13 +1,13 @@
-<h1>question Header</h1>
+<div class="row row-border pad-30">
 <ul>
-    <li *ngFor="let x of data">{{x.first_name |json}}
-        <ul>
-            <li *ngFor="let y of x.question">
-             {{y.category |json}}
-             <ul>
-                 <li *ngFor="let z of y.subcatogory">{{z|json}}</li>
-             </ul>
+    <li *ngFor="let x of data" class="pad-10">
+        <span class="span-bold">{{x.category | uppercase}}</span>
+         <ul>
+            <li *ngFor="let y of x.subCategory"[class]="x.category" >
+             <p-radioButton [class]="x.category" styleClass="lvs-checkbox" value="{{y}}" label="{{y}}" [(ngModel)]="question" (click)="changeQuestion($event)"></p-radioButton>
             </li>
-        </ul>
+        </ul> 
+        
     </li>
 </ul>
+</div>

@@ -1,0 +1,21 @@
+.pad-40{
+    padding-top: 30px;
+}
+.pad-10{
+    padding-top: 10px;
+}
+ul{ list-style-type: none; padding-left: 15px }
+.span-bold{
+    font-weight: 600;
+}
+[styleClass="lvs-checkbox"] {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+[styleClass="lvs-checkbox"] >.ui-chkbox-label {
+        display: inline-block;
+        margin-bottom: 0;
+        cursor: pointer;
+    }

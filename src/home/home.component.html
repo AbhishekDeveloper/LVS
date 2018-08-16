@@ -1,32 +1,43 @@
-<div class="container">
+<div class="container mtop">
    <div class="row ">
     <div class="col-md-4">
      <div class="row row-border">
          <div class="col-md-4">
         <img src="../assets//images/lvs-logo.png">
          </div>
-         <div class="col-md-8">
+         <div class="col-md-8 pad-10">
              <span>Lueker video Archives</span>
              <br>
              <a (click)="setup()"><span class="setup">SETUP</span></a>
          </div>
      </div>
+     <form #f="ngForm">
      <div class="row row-border">
-         <div class="col-md-12">Select user</div>
+    
+            <div class="col-md-12 form-group">
+                    <label for="exampleFormControlSelect1">Select user</label>
+                    <select class="form-control" name="user" [(ngModel)]="user" (change)="onUserSelect()" id="exampleFormControlSelect1">
+                        <option [disabled]="true" value="--select user--">--select user--</option>
+                      <option *ngFor="let x of users" [value]="x">{{x}}</option>
+                    
+                    </select>
+        </div>
+             
      </div>
-     <question-header></question-header>
+    </form>
+     <question-header (verifyActionResponse)="onverifyAction($event)" [getUser]="user"></question-header>
     </div>
 
     <div class="col-md-8">
-        <div class="row header row-border">
+        <div class="row header row-border" *ngIf="option == 'setup'">
             <div class="col-md-12">
                 <header>
                 <h1>{{title}}</h1>           
                 </header>
             </div>
         </div>
-        <lvs-setup *ngIf="option == 'setup'"></lvs-setup>
-        <lvs-recorder-section *ngIf="option == 'recording'"></lvs-recorder-section>
+        <lvs-setup *ngIf="option == 'setup'" (afterSaveCall)="doneClicked($event)"></lvs-setup>
+        <lvs-recorder-section [userInfo]="userInfo" *ngIf="option == 'recording'"></lvs-recorder-section>
     </div>
     </div>
 </div>
